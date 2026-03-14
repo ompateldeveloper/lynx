@@ -22,7 +22,6 @@ export default function leaderebords() {
         };
         fetchLeaderboard();
     }, []);
-    const topPosStyles = [{ borderColor: "#D4AF37" }, { borderColor: "#C0C0C0" }, { borderColor: "#CD7F32" }];
     const pingColor = (latency: number) => {
         if (latency < 500) return "#00FF00";
         if (latency < 1000) return "#FFA500";
@@ -49,34 +48,67 @@ export default function leaderebords() {
                 ) : (
                     <YGroup style={{ backgroundColor: "transparent", gap: 10 }}>
                         {data.length > 0 ? (
-                            data.map((item, index) => (
-                                <YGroup.Item key={item.url}>
-                                    <View
-                                        style={{
-                                            backgroundColor: "#111",
-                                            borderRadius: 16,
-                                            padding: 16,
-                                            borderWidth: 1,
-                                            ...topPosStyles[index],
-                                            backgroundBlendMode: "color-burn",
-                                            // borderColor: index === 0 ? "#00FF00" : "#222"
-                                        }}
-                                    >
-                                        <XStack style={{ justifyContent: "space-between", alignItems: "center" }}>
-                                            <YStack style={{ flex: 1, gap: 4 }}>
-                                                <Text style={{ color: "white", fontWeight: "bold", fontSize: 16 }} numberOfLines={1}>
-                                                    {index + 1}. {item.url}
-                                                </Text>
-                                                <Text style={{ color: "rgba(255,255,255,0.4)", fontSize: 12 }}>{item.totalPings} exploration sessions</Text>
-                                            </YStack>
-                                            <YStack style={{ alignItems: "flex-end", gap: 4 }}>
-                                                <Text style={{ color: pingColor(item.avgLatency), fontWeight: "900", fontSize: 18 }}>{Math.round(item.avgLatency)}ms</Text>
-                                                <Text style={{ color: "rgba(255,255,255,0.4)", fontSize: 10 }}>{Math.round(item.avgYield)}% YIELD</Text>
-                                            </YStack>
-                                        </XStack>
-                                    </View>
-                                </YGroup.Item>
-                            ))
+                            data.map((item, index) => {
+                                const isTopThree = index < 3;
+                                const colors = ["#FFD700", "#C0C0C0", "#CD7F32"]; // Gold, Silver, Bronze
+                                const itemBorderColor = isTopThree ? colors[index] : "#222";
+
+                                return (
+                                    <YGroup.Item key={item.url}>
+                                        <View
+                                            style={{
+                                                backgroundColor: "#0A0A0A",
+                                                borderRadius: 20,
+                                                padding: 16,
+                                                borderWidth: 1,
+                                                borderColor: itemBorderColor,
+                                                shadowColor: isTopThree ? itemBorderColor : "transparent",
+                                                shadowOpacity: 0.2,
+                                                shadowRadius: 10,
+                                                elevation: 5,
+                                            }}
+                                        >
+                                            <XStack style={{ justifyContent: "space-between", alignItems: "center", gap: 12 }}>
+                                                <XStack style={{ flex: 1, gap: 12, alignItems: "center" }}>
+                                                    <View
+                                                        style={{
+                                                            width: 32,
+                                                            height: 32,
+                                                            borderRadius: 16,
+                                                            backgroundColor: isTopThree ? `${itemBorderColor}22` : "#1A1A1A",
+                                                            justifyContent: "center",
+                                                            alignItems: "center",
+                                                            borderWidth: 1,
+                                                            borderColor: isTopThree ? itemBorderColor : "#333",
+                                                        }}
+                                                    >
+                                                        {isTopThree ? (
+                                                            <Star size={16} fill={itemBorderColor} color={itemBorderColor} />
+                                                        ) : (
+                                                            <Text style={{ color: "#888", fontWeight: "bold", fontSize: 12 }}>{index + 1}</Text>
+                                                        )}
+                                                    </View>
+
+                                                    <YStack style={{ flex: 1, gap: 2 }}>
+                                                        <Text style={{ color: "white", fontWeight: "bold", fontSize: 16 }} numberOfLines={1}>
+                                                            {item.url}
+                                                        </Text>
+                                                        <Text style={{ color: "rgba(255,255,255,0.4)", fontSize: 11, fontWeight: "500" }}>{item.totalPings} REQUESTS</Text>
+                                                    </YStack>
+                                                </XStack>
+
+                                                <YStack style={{ alignItems: "flex-end", gap: 2 }}>
+                                                    <XStack style={{ alignItems: "center", gap: 4 }}>
+                                                        <Activity size={12} color={pingColor(item.avgLatency)} />
+                                                        <Text style={{ color: pingColor(item.avgLatency), fontWeight: "900", fontSize: 18 }}>{Math.round(item.avgLatency)}ms</Text>
+                                                    </XStack>
+                                                    <Text style={{ color: "rgba(255,255,255,0.4)", fontSize: 10, fontWeight: "bold" }}>{Math.round(item.avgYield)}% YIELD</Text>
+                                                </YStack>
+                                            </XStack>
+                                        </View>
+                                    </YGroup.Item>
+                                );
+                            })
                         ) : (
                             <YStack style={{ alignItems: "center", marginTop: 60, gap: 10 }}>
                                 <Text style={{ color: "#888" }}>No records found yet</Text>

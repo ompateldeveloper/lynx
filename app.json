@@ -4,7 +4,7 @@
     "slug": "lynx",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/images/lynx-logo.png",
     "scheme": "lynx",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
@@ -20,7 +20,7 @@
       },
       "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false,
-      "package": "com.ompateldeveloper.lynx"
+      "package": "com.truckkun.lynx"
     },
     "web": {
       "output": "static",

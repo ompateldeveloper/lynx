@@ -14,7 +14,7 @@ if (debuggerHost) {
     BASE_URL = `http://${debuggerHost.split(":")[0]}:4000/api`;
 } else if (Platform.OS === "android") {
     // Fallback for Android emulator
-    BASE_URL = "http://10.0.2.2:4000/api";
+    BASE_URL = "https://lynx-server-five.vercel.app/api";
 }
 
 export const api = axios.create({
