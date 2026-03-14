@@ -4,7 +4,9 @@ import "react-native-reanimated";
 import { useColorScheme } from "@/hooks/use-color-scheme";
 import { TamaguiProvider, createTamagui } from "@tamagui/core";
 import { defaultConfig } from "@tamagui/config/v5";
-import { authClient } from "@/lib/auth-client";
+import { Button, Tabs, TabsProvider } from "tamagui";
+import { BarChart2 } from "lucide-react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const config = createTamagui(defaultConfig);
 
@@ -14,23 +16,16 @@ declare module "@tamagui/core" {
     interface TamaguiCustomConfig extends Conf {}
 }
 
-const protectedRoutes = ["(screens)"];
-
 export default function RootLayout() {
     const colorScheme = useColorScheme();
-    // const { data: session } = authClient.useSession();
     return (
         <TamaguiProvider config={config} defaultTheme={colorScheme === "dark" ? "dark" : "light"}>
-            
-            <Stack>
-                <Stack.Screen name="(screens)" options={{ headerShown: false }} />
-                {/* {
-                    session ? (
-                    ) : (
-                        <Stack.Screen name="index" options={{ headerShown: false }} />
-                    )
-                } */}
-            </Stack>
+            <SafeAreaView style={{ flex: 1 ,backgroundColor: "black" }}>
+                <Stack>
+                    <Stack.Screen name="index" options={{ headerShown: false }} />
+                    <Stack.Screen name="leaderebords" options={{ headerShown: false }} />
+                </Stack>
+            </SafeAreaView>
         </TamaguiProvider>
     );
 }
