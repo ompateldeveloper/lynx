@@ -1,10 +1,10 @@
 {
   "expo": {
-    "name": "lynx",
+    "name": "LYNX",
     "slug": "lynx",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "orientation": "portrait",
-    "icon": "./assets/images/lynx-logo.png",
+    "icon": "./assets/images/lynx_logo.png",
     "scheme": "lynx",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
@@ -13,10 +13,9 @@
     },
     "android": {
       "adaptiveIcon": {
-        "backgroundColor": "#E6F4FE",
-        "foregroundImage": "./assets/images/lynx-logo.png",
-        "backgroundImage": "./assets/images/lynx-logo.png",
-        "monochromeImage": "./assets/images/lynx-logo.png"
+        "backgroundColor": "#000000",
+        "foregroundImage": "./assets/images/lynx_logo.png",
+        "monochromeImage": "./assets/images/lynx_logo.png"
       },
       "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false,
