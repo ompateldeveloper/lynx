@@ -73,6 +73,12 @@ npm run start
 ```
 npm run android
 ```
+`
+Note: For backend Refer to :
+`
+
+[lynx-server](https://github.com/ompateldeveloper/lynx-server)
+
 
 ---
 
